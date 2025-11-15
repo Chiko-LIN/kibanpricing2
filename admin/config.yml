@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  # 博客文章管理
+  - name: "blog"
+    label: "博客文章"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "布局", name: "layout", widget: "hidden", default: "article"}
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "发布日期", name: "date", widget: "datetime"}
+      - {label: "作者", name: "author", widget: "string", required: false}
+      - {label: "分类", name: "categories", widget: "list", required: false}
+      - {label: "标签", name: "tags", widget: "list", required: false}
+      - {label: "封面图片", name: "image", widget: "image", required: false}
+      - {label: "摘要", name: "excerpt", widget: "text", required: false}
+      - {label: "正文", name: "body", widget: "markdown"}
+
+  # 自定义着陆页管理
+  - name: "pages"
+    label: "着陆页"
+    folder: "_pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "布局", name: "layout", widget: "select", options: ["page", "landing"], default: "landing"}
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "永久链接", name: "permalink", widget: "string", hint: "例如: /services/ 或 /about/"}
+      - {label: "页面描述", name: "description", widget: "text", required: false}
+      - {label: "标题图片", name: "header_image", widget: "image", required: false}
+      - {label: "显示在导航", name: "show_in_nav", widget: "boolean", default: true, required: false}
+      - {label: "正文", name: "body", widget: "markdown"}
