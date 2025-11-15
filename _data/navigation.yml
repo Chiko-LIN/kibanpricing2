@@ -1,4 +1,26 @@
 header:
+  # 新添加的导航项
+  - titles:
+      en: Home
+    url: /
+  
+  - titles:
+      en: Pricing
+    url: /pricing/
+  
+  - titles:
+      en: Updates
+    url: /blog/
+  
+  - titles:
+      en: Contact Us
+    url: /contact/
+  
+  - titles:
+      en: About Me
+    url: /about/
+  
+  # 原有的多语言配置导航项
   - titles:
       # @start locale config
       en      : &EN       Archive
@@ -24,7 +46,7 @@ header:
       tr      : &TR       Arşivdekiler
       # @end locale config
     url: /archive.html
-
+  
   - titles:
       # @start locale config
       en      : &EN       About
