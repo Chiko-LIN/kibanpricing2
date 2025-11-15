@@ -36,7 +36,7 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 author:
   type: person # "person" (default), "organization"
   name: Chiko-LIN
-  url: https://kibanpricing1.netlify.app
+  url: https://kibanpricing2.netlify.app
   avatar: # path or url of avatar image (square)
   bio: Signature designer and community builder
   email: your@email.com # 改成你的真实邮箱
