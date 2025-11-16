@@ -1,49 +1,29 @@
 header:
-  # Navigation items
   - titles:
       en: Home
       ja: ホーム
     url: /
-  
   - titles:
       en: Pricing
       ja: 料金
     url: /pricing/
-  
   - titles:
       en: Updates
       ja: 更新情報
     url: /blog/
-  
   - titles:
       en: Contact Us
       ja: お問い合わせ
     url: /contact/
-  
   - titles:
       en: About Me
       ja: 私について
     url: /about/
-  
-  # Multi-language navigation items
   - titles:
-      # @start locale config
-      en      : &EN       Archive
-      en-GB   : *EN
-      en-US   : *EN
-      en-CA   : *EN
-      en-AU   : *EN
-      ja      : &JA       アーカイブ
-      # @end locale config
-    url: /archive.html
-  
-  - titles:
-      # @start locale config
-      en      : &EN       About
-      en-GB   : *EN
-      en-US   : *EN
-      en-CA   : *EN
-      en-AU   : *EN
-      ja      : &JA       について
-      # @end locale config
+      en: About
+      en-GB: About
+      en-US: About
+      en-CA: About
+      en-AU: About
+      ja: について
     url: /about.html
