@@ -21,7 +21,17 @@
         {%- include author-links.html author=_site_author -%}
       </div>
     </div>
-
+    {%- if site.languages -%}
+    <div class="language-switcher mt-2">
+      <span>{{ site.data.locales[site.default_lang].footer.language_label | default: "Language" }}:</span>
+      {%- for lang in site.languages -%}
+        <a href="/{{ lang }}{{ page.url }}" {%- if lang == site.lang -%}class="active"{%- endif -%}>
+          {%- if lang == "en" -%}English{%- elsif lang == "ja" -%}日本語{%- else -%}{{ lang }}{%- endif -%}
+        </a>
+        {%- unless forloop.last -%} | {%- endunless -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
     {%- include snippets/get-locale-string.html key='COPYRIGHT_DATES' -%}
     {%- assign _locale_copyright_dates = __return -%}
     <div class="site-info mt-2">
