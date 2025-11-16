@@ -20,15 +20,15 @@ text_skin: ocean # "default" (default), "dark", "forest", "ocean", "chocolate", 
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url: https://kibanpricing2.netlify.app # the base hostname & protocol for your site
 baseurl: # does not include hostname
-title: Kibanpricing
+title: キバンプライシング
 description: > # this means to ignore newlines until "Language & timezone"
-  Professional signature design service - Create your unique signature
+  プロフェッショナルなサイン作成サービス - あなただけのユニークなサインを作成します
 
 
 ## => Language and Timezone
 ##############################
-lang: en # the language of your site, default as "en"
-timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
+lang: ja # the language of your site, default as "en"
+timezone: Asia/Tokyo # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 
 ## => Author and Social
@@ -38,7 +38,7 @@ author:
   name: Chiko-LIN
   url: https://kibanpricing2.netlify.app
   avatar: # path or url of avatar image (square)
-  bio: Signature designer and community builder
+  bio: サインデザイナー＆コミュニティビルダー
   email: your@email.com # 改成你的真实邮箱
   facebook: # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
   twitter: # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
@@ -158,10 +158,10 @@ comments:
   ## Valine
   # please refer to https://valine.js.org/en/ for more info.
   valine:
-    app_id: # LeanCloud App id - 请在 https://console.leancloud.app 注册后获取
-    app_key: # LeanCloud App key - 请在 https://console.leancloud.app 注册后获取
-    placeholder: 欢迎留言咨询签名设计服务... # Prompt information
-    visitor: true # false (default) - 启用访客统计
+    app_id: # LeanCloud App id - https://console.leancloud.app で登録後に取得
+    app_key: # LeanCloud App key - https://console.leancloud.app で登録後に取得
+    placeholder: サイン作成サービスについてお気軽にお問い合わせください... # Prompt information
+    visitor: true # false (default) - 訪問者統計を有効化
     meta: [nick, mail] # "[nick, mail, link]" (default) nickname, E-mail, Personal-site
 
 
