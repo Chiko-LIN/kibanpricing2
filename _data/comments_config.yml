@@ -1,0 +1,21 @@
+description: 配置 Valine 评论系统。请先在 https://console.leancloud.app 注册账号并创建应用，然后将 App ID 和 App Key 填入下方。
+leancloud_app_id: ""
+leancloud_app_key: ""
+placeholder: 欢迎留言咨询签名设计服务...
+visitor: true
+meta:
+  - nick
+  - mail
+usage_note: |
+  评论数据存储在 LeanCloud 中。您可以登录 LeanCloud 控制台查看和管理所有评论。
+  
+  评论管理步骤：
+  1. 登录 LeanCloud 控制台: https://console.leancloud.app
+  2. 选择您的应用
+  3. 进入"存储" -> "数据" -> "Comment" 表
+  4. 在这里您可以查看、编辑、删除所有评论
+  
+  注意：
+  - 每条评论都有作者昵称、邮箱、内容、时间等信息
+  - 可以批量删除垃圾评论
+  - 可以导出评论数据作为备份

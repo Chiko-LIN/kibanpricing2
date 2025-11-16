@@ -109,10 +109,10 @@ mathjax: # false (default), true
 mathjax_autoNumber: # false (default), true
 
 ## Mermaid
-mermaid: # false (default), true
+mermaid: true # false (default), true
 
 ## Chart
-chart: # false (default), true
+chart: true # false (default), true
 
 
 ## => Paginate
@@ -129,7 +129,7 @@ sources: bootcdn # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: false # false (default), "addtoany", "addthis", "custom"
+  provider: addtoany # false (default), "addtoany", "addthis", "custom"
 
   ## AddThis
   addthis:
@@ -139,7 +139,7 @@ sharing:
 ## => Comments
 ##############################
 comments:
-  provider: false # false (default), "disqus", "gitalk", "valine", "custom"
+  provider: valine # false (default), "disqus", "gitalk", "valine", "custom"
 
   ## Disqus
   disqus:
@@ -158,11 +158,11 @@ comments:
   ## Valine
   # please refer to https://valine.js.org/en/ for more info.
   valine:
-    app_id: # LeanCloud App id
-    app_key: # LeanCloud App key
-    placeholder: # Prompt information
-    visitor: # false (default)
-    meta: # "[nick, mail, link]" (default) nickname, E-mail, Personal-site
+    app_id: # LeanCloud App id - 请在 https://console.leancloud.app 注册后获取
+    app_key: # LeanCloud App key - 请在 https://console.leancloud.app 注册后获取
+    placeholder: 欢迎留言咨询签名设计服务... # Prompt information
+    visitor: true # false (default) - 启用访客统计
+    meta: [nick, mail] # "[nick, mail, link]" (default) nickname, E-mail, Personal-site
 
 
 ## => Pageview

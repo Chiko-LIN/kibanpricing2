@@ -16,11 +16,15 @@ collections:
       - {label: "布局", name: "layout", widget: "hidden", default: "article"}
       - {label: "标题", name: "title", widget: "string"}
       - {label: "发布日期", name: "date", widget: "datetime"}
+      - {label: "文章Key", name: "key", widget: "string", hint: "唯一标识，用于评论和浏览统计，例如: article-2024-01-01"}
       - {label: "作者", name: "author", widget: "string", required: false}
       - {label: "分类", name: "categories", widget: "list", required: false}
       - {label: "标签", name: "tags", widget: "list", required: false}
       - {label: "封面图片", name: "image", widget: "image", required: false}
       - {label: "摘要", name: "excerpt", widget: "text", required: false}
+      - {label: "启用评论", name: "comment", widget: "boolean", default: true, required: false}
+      - {label: "启用分享", name: "sharing", widget: "boolean", default: true, required: false}
+      - {label: "显示目录", name: "aside.toc", widget: "boolean", default: true, required: false}
       - {label: "正文", name: "body", widget: "markdown"}
 
   # 自定义着陆页管理
@@ -37,3 +41,25 @@ collections:
       - {label: "标题图片", name: "header_image", widget: "image", required: false}
       - {label: "显示在导航", name: "show_in_nav", widget: "boolean", default: true, required: false}
       - {label: "正文", name: "body", widget: "markdown"}
+
+  # 站点配置管理
+  - name: "settings"
+    label: "网站设置"
+    files:
+      - label: "评论系统配置"
+        name: "comments"
+        file: "_data/comments_config.yml"
+        fields:
+          - {label: "评论系统说明", name: "description", widget: "text", default: "配置 Valine 评论系统。请先在 https://console.leancloud.app 注册账号并创建应用，然后将 App ID 和 App Key 填入下方。"}
+          - {label: "LeanCloud App ID", name: "leancloud_app_id", widget: "string", required: false, hint: "从 LeanCloud 控制台获取"}
+          - {label: "LeanCloud App Key", name: "leancloud_app_key", widget: "string", required: false, hint: "从 LeanCloud 控制台获取"}
+          - {label: "评论占位符文本", name: "placeholder", widget: "string", default: "欢迎留言咨询签名设计服务...", required: false}
+          - {label: "启用访客统计", name: "visitor", widget: "boolean", default: true, required: false}
+          - label: "必填信息"
+            name: "meta"
+            widget: "select"
+            multiple: true
+            options: ["nick", "mail", "link"]
+            default: ["nick", "mail"]
+            required: false
+          - {label: "使用说明", name: "usage_note", widget: "text", default: "评论数据存储在 LeanCloud 中。您可以登录 LeanCloud 控制台查看和管理所有评论。在 LeanCloud 的 Comment 表中可以查看、编辑、删除评论。", required: false}
