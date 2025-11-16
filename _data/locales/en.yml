@@ -1,8 +1,10 @@
+# English translations
 site:
   title: "Kibanpricing"
-  footer:
-    copyright: "© 2025 Kibanpricing"
-    language_label: "Language"
+
+footer:
+  language_label: "Language"
+
 home:
-  title: "Welcome"
-  intro: "This is an example."
+  title: "Welcome to Kibanpricing"
+  intro: "Professional signature design service - Create your unique signature"

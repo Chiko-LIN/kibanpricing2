@@ -18,7 +18,7 @@
 ##############################
 text_skin: ocean # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
-url: melodious-gingersnap-eedd0f.netlify.app # the base hostname & protocol for your site
+url: https://melodious-gingersnap-eedd0f.netlify.app # the base hostname & protocol for your site
 baseurl: # does not include hostname
 title: Kibanpricing
 description: > # this means to ignore newlines until "Language & timezone"
@@ -30,7 +30,7 @@ description: > # this means to ignore newlines until "Language & timezone"
 lang: en # the language of your site, default as "en"
 timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
-## => Multilingual Support
+## => Multi-Language Support (Scheme A)
 ##############################
 languages: ["en", "ja"]
 default_lang: "en"
