@@ -1,10 +1,8 @@
-# Japanese translations (日本語)
 site:
-  title: "キバンプライシング"
-
-footer:
-  language_label: "言語"
-
+  title: "Kibanpricing"
+  footer:
+    copyright: "© 2025 Kibanpricing"
+    language_label: "言語"
 home:
-  title: "キバンプライシングへようこそ"
-  intro: "プロフェッショナルなサイン作成サービス - あなただけのユニークなサインを作成"
+  title: "ようこそ"
+  intro: "これはサンプルです。"
