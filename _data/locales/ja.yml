@@ -1,0 +1,8 @@
+site:
+  title: "Kibanpricing"
+  footer:
+    copyright: "© 2025 Kibanpricing"
+    language_label: "言語"
+home:
+  title: "ようこそ"
+  intro: "これはサンプルです。"

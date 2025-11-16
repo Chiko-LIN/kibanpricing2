@@ -1,0 +1,8 @@
+site:
+  title: "Kibanpricing"
+  footer:
+    copyright: "© 2025 Kibanpricing"
+    language_label: "Language"
+home:
+  title: "Welcome"
+  intro: "This is an example."
