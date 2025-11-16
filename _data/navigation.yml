@@ -1,26 +1,31 @@
 header:
-  # 新添加的导航项
+  # Navigation items
   - titles:
       en: Home
+      ja: ホーム
     url: /
   
   - titles:
       en: Pricing
+      ja: 料金
     url: /pricing/
   
   - titles:
       en: Updates
+      ja: 更新情報
     url: /blog/
   
   - titles:
       en: Contact Us
+      ja: お問い合わせ
     url: /contact/
   
   - titles:
       en: About Me
+      ja: 私について
     url: /about/
   
-  # 原有的多语言配置导航项
+  # Multi-language navigation items
   - titles:
       # @start locale config
       en      : &EN       Archive
@@ -28,22 +33,7 @@ header:
       en-US   : *EN
       en-CA   : *EN
       en-AU   : *EN
-      zh-Hans : &ZH_HANS  归档
-      zh      : *ZH_HANS
-      zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  歸檔
-      zh-TW   : *ZH_HANT
-      zh-HK   : *ZH_HANT
-      ko      : &KO       아카이브
-      ko-KR   : *KO
-      fr      : &FR       Archives
-      fr-BE   : *FR
-      fr-CA   : *FR
-      fr-CH   : *FR
-      fr-FR   : *FR
-      fr-LU   : *FR
-      tr      : &TR       Arşivdekiler
+      ja      : &JA       アーカイブ
       # @end locale config
     url: /archive.html
   
@@ -54,21 +44,6 @@ header:
       en-US   : *EN
       en-CA   : *EN
       en-AU   : *EN
-      zh-Hans : &ZH_HANS  关于
-      zh      : *ZH_HANS
-      zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  關於
-      zh-TW   : *ZH_HANT
-      zh-HK   : *ZH_HANT
-      ko      : &KO       소개
-      ko-KR   : *KO
-      fr      : &FR       À propos
-      fr-BE   : *FR
-      fr-CA   : *FR
-      fr-CH   : *FR
-      fr-FR   : *FR
-      fr-LU   : *FR
-      tr      : &TR       Hakkında
+      ja      : &JA       について
       # @end locale config
     url: /about.html

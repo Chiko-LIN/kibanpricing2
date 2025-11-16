@@ -56,5 +56,4 @@ collections:
                 fields:
                   - {label: "英语 (en)", name: "en", widget: "string", required: false}
                   - {label: "日语 (ja)", name: "ja", widget: "string", required: false}
-                  - {label: "德语 (de)", name: "de", widget: "string", required: false}
               - {label: "链接地址", name: "url", widget: "string", hint: "例如: / 或 /about/ 或 /pricing/"}
