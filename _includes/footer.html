@@ -21,6 +21,33 @@
         {%- include author-links.html author=_site_author -%}
       </div>
     </div>
+    {%- include snippets/get-locale-string.html key='COPYRIGHT_DATES' -%}
+    {%- assign _locale_copyright_dates = __return -%}
+    
+    {%- if site.languages -%}
+    <div class="language-switcher mt-2">
+      {%- if site.data.locales[site.lang].footer.language_label -%}
+      <span>{{ site.data.locales[site.lang].footer.language_label }}: </span>
+      {%- else -%}
+      <span>Language: </span>
+      {%- endif -%}
+      {%- assign _current_page = page.url | remove_first: "/" -%}
+      {%- for lang in site.languages -%}
+        {%- if lang == site.default_lang -%}
+          {%- assign _lang_url = site.baseurl | append: "/" | append: _current_page -%}
+        {%- else -%}
+          {%- assign _lang_url = site.baseurl | append: "/" | append: lang | append: "/" | append: _current_page -%}
+        {%- endif -%}
+        {%- if lang == site.lang -%}
+          <strong>{{ lang }}</strong>
+        {%- else -%}
+          <a href="{{ _lang_url }}">{{ lang }}</a>
+        {%- endif -%}
+        {%- unless forloop.last -%} | {%- endunless -%}
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+    
     <div class="site-info mt-2">
       <div>
         {%- include snippets/get-locale-string.html key='COPYRIGHT_DATES' -%}
