@@ -32,7 +32,7 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 
 ## => Multi-Language Support
 ##############################
-languages: ["en", "ja"]
+languages: ["en", "ja", "de"]
 default_lang: "en"
 
 
