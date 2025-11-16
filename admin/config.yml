@@ -37,3 +37,43 @@ collections:
       - {label: "标题图片", name: "header_image", widget: "image", required: false}
       - {label: "显示在导航", name: "show_in_nav", widget: "boolean", default: true, required: false}
       - {label: "正文", name: "body", widget: "markdown"}
+
+  # 导航菜单管理
+  - name: "navigation"
+    label: "导航菜单"
+    files:
+      - label: "网站导航"
+        name: "header_navigation"
+        file: "_data/navigation.yml"
+        fields:
+          - label: "导航项列表"
+            name: "header"
+            widget: "list"
+            fields:
+              - label: "标题（多语言）"
+                name: "titles"
+                widget: "object"
+                fields:
+                  - {label: "英语 (en)", name: "en", widget: "string", required: false}
+                  - {label: "英语-英国 (en-GB)", name: "en-GB", widget: "string", required: false}
+                  - {label: "英语-美国 (en-US)", name: "en-US", widget: "string", required: false}
+                  - {label: "英语-加拿大 (en-CA)", name: "en-CA", widget: "string", required: false}
+                  - {label: "英语-澳大利亚 (en-AU)", name: "en-AU", widget: "string", required: false}
+                  - {label: "简体中文 (zh-Hans)", name: "zh-Hans", widget: "string", required: false}
+                  - {label: "中文 (zh)", name: "zh", widget: "string", required: false}
+                  - {label: "中文-中国 (zh-CN)", name: "zh-CN", widget: "string", required: false}
+                  - {label: "中文-新加坡 (zh-SG)", name: "zh-SG", widget: "string", required: false}
+                  - {label: "繁体中文 (zh-Hant)", name: "zh-Hant", widget: "string", required: false}
+                  - {label: "中文-台湾 (zh-TW)", name: "zh-TW", widget: "string", required: false}
+                  - {label: "中文-香港 (zh-HK)", name: "zh-HK", widget: "string", required: false}
+                  - {label: "韩语 (ko)", name: "ko", widget: "string", required: false}
+                  - {label: "韩语-韩国 (ko-KR)", name: "ko-KR", widget: "string", required: false}
+                  - {label: "法语 (fr)", name: "fr", widget: "string", required: false}
+                  - {label: "法语-比利时 (fr-BE)", name: "fr-BE", widget: "string", required: false}
+                  - {label: "法语-加拿大 (fr-CA)", name: "fr-CA", widget: "string", required: false}
+                  - {label: "法语-瑞士 (fr-CH)", name: "fr-CH", widget: "string", required: false}
+                  - {label: "法语-法国 (fr-FR)", name: "fr-FR", widget: "string", required: false}
+                  - {label: "法语-卢森堡 (fr-LU)", name: "fr-LU", widget: "string", required: false}
+                  - {label: "土耳其语 (tr)", name: "tr", widget: "string", required: false}
+                  - {label: "日语 (ja)", name: "ja", widget: "string", required: false}
+              - {label: "链接地址", name: "url", widget: "string", hint: "例如: / 或 /about/ 或 /pricing/"}
