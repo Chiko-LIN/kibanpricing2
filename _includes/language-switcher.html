@@ -1,7 +1,11 @@
 {%- assign _current_lang = page.lang | default: site.default_lang -%}
 {%- assign _locale = site.data.locales[_current_lang] -%}
 <div class="language-switcher">
-  <label for="lang-select">{{ _locale.site.footer.language_label }}:</label>
+  {%- if _current_lang == 'en' -%}
+    <label for="lang-select">Language:</label>
+  {%- else -%}
+    <label for="lang-select">{{ _locale.site.footer.language_label }}:</label>
+  {%- endif -%}
   <select id="lang-select" onchange="window.LangSwitch.onChange(event)">
     {%- for lang in site.languages -%}
       <option value="{{ lang }}"{% if lang == _current_lang %} selected{% endif %}>
