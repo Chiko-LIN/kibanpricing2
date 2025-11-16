@@ -4,7 +4,7 @@
     var path = window.location.pathname.replace(/^\/+/, '').split('/');
     var first = path[0];
     if (first === 'en' || first === 'ja') return first;
-    return document.documentElement.lang && document.documentElement.lang.indexOf('ja') === 0 ? 'ja' : 'en';
+    return document.documentElement.lang && document.documentElement.lang.indexOf('en') === 0 ? 'en' : 'ja';
   }
   function getRestPath() {
     var path = window.location.pathname.replace(/^\/+/, '').split('/');
