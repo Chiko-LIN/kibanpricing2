@@ -2,22 +2,27 @@ header:
   # 新添加的导航项
   - titles:
       en: Home
+      ja: ホーム
     url: /
   
   - titles:
       en: Pricing
+      ja: 料金
     url: /pricing/
   
   - titles:
       en: Updates
+      ja: 更新情報
     url: /blog/
   
   - titles:
       en: Contact Us
+      ja: お問い合わせ
     url: /contact/
   
   - titles:
       en: About Me
+      ja: 私について
     url: /about/
   
   # 原有的多语言配置导航项
@@ -37,6 +42,8 @@ header:
       zh-HK   : *ZH_HANT
       ko      : &KO       아카이브
       ko-KR   : *KO
+      ja      : &JA       アーカイブ
+      ja-JP   : *JA
       fr      : &FR       Archives
       fr-BE   : *FR
       fr-CA   : *FR
@@ -63,6 +70,8 @@ header:
       zh-HK   : *ZH_HANT
       ko      : &KO       소개
       ko-KR   : *KO
+      ja      : &JA       について
+      ja-JP   : *JA
       fr      : &FR       À propos
       fr-BE   : *FR
       fr-CA   : *FR

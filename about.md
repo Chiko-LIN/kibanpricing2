@@ -16,6 +16,8 @@ titles:
   zh-HK   : *ZH_HANT
   ko      : &KO       소개
   ko-KR   : *KO
+  ja      : &JA       について
+  ja-JP   : *JA
   fr      : &FR       À propos
   fr-BE   : *FR
   fr-CA   : *FR

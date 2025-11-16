@@ -1,0 +1,21 @@
+description: Valineコメントシステムを設定します。まず https://console.leancloud.app でアカウント登録し、アプリケーションを作成してから、App IDとApp Keyを以下に入力してください。
+leancloud_app_id: ""
+leancloud_app_key: ""
+placeholder: サイン作成サービスについてお気軽にお問い合わせください...
+visitor: true
+meta:
+  - nick
+  - mail
+usage_note: |
+  コメントデータはLeanCloudに保存されます。LeanCloudコンソールにログインして、すべてのコメントを表示・管理できます。
+  
+  コメント管理の手順：
+  1. LeanCloudコンソールにログイン: https://console.leancloud.app
+  2. アプリケーションを選択
+  3. 「ストレージ」→「データ」→「Comment」テーブルに移動
+  4. ここですべてのコメントを表示、編集、削除できます
+  
+  注意事項：
+  - 各コメントには著者のニックネーム、メール、内容、時刻などの情報が含まれます
+  - スパムコメントを一括削除できます
+  - コメントデータをバックアップとしてエクスポートできます

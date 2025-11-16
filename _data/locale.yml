@@ -111,6 +111,31 @@ ko: &KO
 ko-KR:
   <<: *KO
 
+## => Japanese
+########################
+ja: &JA
+  SUBSCRIBE               : "購読"
+  READMORE                : "続きを読む"
+  SEARCH                  : "検索"
+  CANCEL                  : "キャンセル"
+  VIEWS                   : "閲覧"
+  LAST_UPDATED            : "最終更新"
+  PREVIOUS                : "前へ"
+  NEXT                    : "次へ"
+  ARTICLE_DATE_FORMAT     : "%Y年%m月%d日"
+  ARTICLE_LIST_DATE_FORMAT: "%m月%d日"
+  STATISTICS              : "全[POST_COUNT]記事、[PAGE_COUNT]ページ。"
+  LICENSE_ANNOUNCE        : "この記事は[LICENSE]ライセンスの下にあります。"
+  POST_ON_GITHUB          : "Githubで編集"
+  FOLLOW_ME               : "[NAME]でフォローする。"
+  FOLLOW_US               : "[NAME]でフォローする。"
+  EMAIL_ME                : "メールを送る。"
+  EMAIL_US                : "メールを送る。"
+  COPYRIGHT_DATES         : "2021"
+
+ja-JP:
+  <<: *JA
+
 ## => French
 ########################
 fr: &FR
