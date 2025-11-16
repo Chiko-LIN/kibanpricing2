@@ -1,3 +1,32 @@
 /* start custom scss snippet */
 
+/* Language Switcher Styles */
+.language-switcher {
+  margin-top: 0.5rem;
+  
+  label {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  select {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    
+    &:hover {
+      border-color: #888;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: #0366d6;
+      box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+    }
+  }
+}
+
 /* end custom scss snippet */
