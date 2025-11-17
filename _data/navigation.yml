@@ -19,11 +19,3 @@ header:
       en: About Me
       ja: 私について
     url: /about/
-  - titles:
-      en: About
-      en-GB: About
-      en-US: About
-      en-CA: About
-      en-AU: About
-      ja: について
-    url: /about.html
