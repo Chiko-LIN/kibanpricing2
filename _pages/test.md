@@ -1,7 +1,7 @@
 ---
 layout: landing
 title: Test
-permalink: /pricing
+permalink: /ja/pricing
 show_in_nav: true
 ---
 <!--StartFragment-->
