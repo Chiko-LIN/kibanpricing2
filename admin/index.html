@@ -4,9 +4,36 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
+  <style>
+    /* 修复悬浮工具栏 - 改为固定在顶部 */
+    [class*="AppHeader-header-"] {
+      position: static !important;
+      position: relative !important;
+    }
+    
+    /* 确保顶部工具栏不悬浮 */
+    [class*="ToolbarContainer-toolbarContainer-"] {
+      position: static !important;
+      position: relative !important;
+    }
+    
+    /* 移除sticky定位 */
+    [class*="sticky"] {
+      position: static !important;
+    }
+    
+    /* 编辑器工具栏也改为静态 */
+    [class*="EditorToolbar-toolbarContainer-"],
+    [class*="ControlBar-root-"] {
+      position: static !important;
+      position: relative !important;
+    }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script src="save-and-open.js"></script>
+
+  <!-- Save & Open Page 按钮逻辑 -->
+  <script src="/admin/save-and-open.js"></script>
 </body>
 </html>
