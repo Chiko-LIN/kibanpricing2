@@ -20,14 +20,13 @@
       
       if (entries.length === 0) {
         // Try alternative approach - find all links that might be entry cards
-        var allLinks = document.querySelectorAll('a[href*="/collections/pages/entries/"]');
-        entries = [];
-        allLinks.forEach(function(link) {
-          var card = link.closest('[class*="Card"]') || link.closest('li') || link.closest('div[class*="entry"]');
-          if (card && !card.querySelector('.custom-view-button')) {
-            entries.push(card);
-          }
-        });
+        entries = Array.from(document.querySelectorAll('a[href*="/collections/pages/entries/"]'))
+          .map(function(link) {
+            return link.closest('[class*="Card"]') || link.closest('li') || link.closest('div[class*="entry"]');
+          })
+          .filter(function(card) {
+            return card && !card.querySelector('.custom-view-button');
+          });
       }
       
       Array.from(entries).forEach(function(entry) {
@@ -64,7 +63,7 @@
             }
           }
           // Method 2: Direct path detection
-          if (line.startsWith('/') && line.length > 1 && line.length < 100 && !line.includes(' ') && line.includes('/')) {
+          if (line.startsWith('/') && line.length > 1 && line.length < 100 && !line.includes(' ')) {
             permalink = line;
             break;
           }
@@ -149,11 +148,13 @@
     }
 
     // Use MutationObserver to watch for collection list changes
+    var debounceTimeout = null;
+    
     function watchForCollectionList() {
       var observer = new MutationObserver(function() {
         // Debounce the calls
-        clearTimeout(observer.timeout);
-        observer.timeout = setTimeout(function() {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(function() {
           if (window.location.hash.includes('/collections/pages')) {
             addViewButtons();
           }
@@ -166,9 +167,8 @@
         subtree: true
       });
 
-      // Also run immediately after a delay
+      // Run after initial delays to catch entries as they load
       setTimeout(addViewButtons, 1000);
-      setTimeout(addViewButtons, 2000);
       setTimeout(addViewButtons, 3000);
     }
 
