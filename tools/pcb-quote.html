@@ -1,0 +1,786 @@
+---
+layout: none
+permalink: /tools/pcb-quote/
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCB見積もり比較ツール - Kibanpricing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', 'Open Sans', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background-color: #F2F2F2;
+      color: #6B6B6B;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #1abc9c;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #6B6B6B;
+      font-size: 1.1em;
+    }
+
+    .main-card {
+      background: white;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .form-section h2 {
+      color: #1abc9c;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #1abc9c;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #6B6B6B;
+    }
+
+    label .required {
+      color: #e74c3c;
+      margin-left: 3px;
+    }
+
+    input, select {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #1abc9c;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid #1abc9c;
+      background: white;
+      color: #1abc9c;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .toggle-btn.active {
+      background: #1abc9c;
+      color: white;
+    }
+
+    .toggle-btn:hover {
+      background: #16a085;
+      color: white;
+      border-color: #16a085;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #16a085;
+    }
+
+    .submit-btn:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #1abc9c;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .progress-bar {
+      display: none;
+      width: 100%;
+      height: 6px;
+      background: #ecf0f1;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #1abc9c;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .results-container {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .result-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border-left: 4px solid #1abc9c;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .supplier-name {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1abc9c;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+
+    .result-table th,
+    .result-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .result-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #6B6B6B;
+    }
+
+    .price-highlight {
+      color: #1abc9c;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .error-message {
+      display: none;
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      border-left: 4px solid #c33;
+    }
+
+    .success-message {
+      display: none;
+      background: #efe;
+      color: #3c3;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      border-left: 4px solid #3c3;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .result-table {
+        font-size: 0.9em;
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 8px 5px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      body {
+        padding: 10px;
+      }
+
+      .main-card {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>PCB見積もり比較ツール</h1>
+      <p class="subtitle">複数のPCBメーカーから最適な見積もりを見つけましょう</p>
+    </header>
+
+    <div class="main-card">
+      <div class="form-section">
+        <h2>単位・通貨設定</h2>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" data-unit="mm" onclick="setUnit('mm')">ミリメートル (mm)</button>
+          <button type="button" class="toggle-btn" data-unit="inch" onclick="setUnit('inch')">インチ (inch)</button>
+        </div>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" data-currency="USD" onclick="setCurrency('USD')">米ドル (USD)</button>
+          <button type="button" class="toggle-btn" data-currency="JPY" onclick="setCurrency('JPY')">日本円 (JPY)</button>
+        </div>
+      </div>
+
+      <form id="pcbForm">
+        <div class="form-section">
+          <h2>基本仕様</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="layer">層数<span class="required">*</span></label>
+              <select id="layer" name="layer" required>
+                <option value="1">1層</option>
+                <option value="2" selected>2層</option>
+                <option value="4">4層</option>
+                <option value="6">6層</option>
+                <option value="8">8層</option>
+                <option value="10">10層</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="qty">数量<span class="required">*</span></label>
+              <input type="number" id="qty" name="qty" value="10" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="thickness">厚さ (mm)<span class="required">*</span></label>
+              <select id="thickness" name="thickness" required>
+                <option value="0.4">0.4mm</option>
+                <option value="0.6">0.6mm</option>
+                <option value="0.8">0.8mm</option>
+                <option value="1.0">1.0mm</option>
+                <option value="1.2">1.2mm</option>
+                <option value="1.6" selected>1.6mm</option>
+                <option value="2.0">2.0mm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>サイズ</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="length"><span id="lengthLabel">長さ (mm)</span><span class="required">*</span></label>
+              <input type="number" id="length" name="length" value="100" min="1" step="0.1" required>
+            </div>
+            <div class="form-group">
+              <label for="width"><span id="widthLabel">幅 (mm)</span><span class="required">*</span></label>
+              <input type="number" id="width" name="width" value="100" min="1" step="0.1" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>表面処理・仕上げ</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="surface_finish">表面処理<span class="required">*</span></label>
+              <select id="surface_finish" name="surface_finish" required>
+                <option value="HASL Lead Free" selected>HASL鉛フリー</option>
+                <option value="HASL">HASL</option>
+                <option value="ENIG">ENIG (無電解金)</option>
+                <option value="OSP">OSP</option>
+                <option value="Immersion Silver">Immersion Silver</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="color">ソルダーマスク色<span class="required">*</span></label>
+              <select id="color" name="color" required>
+                <option value="Green" selected>緑</option>
+                <option value="Red">赤</option>
+                <option value="Blue">青</option>
+                <option value="Black">黒</option>
+                <option value="White">白</option>
+                <option value="Yellow">黄</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="silkscreen">シルク色</label>
+              <select id="silkscreen" name="silkscreen">
+                <option value="White" selected>白</option>
+                <option value="Black">黒</option>
+                <option value="None">なし</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>銅厚・配線</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="outer_cu">外層銅厚<span class="required">*</span></label>
+              <select id="outer_cu" name="outer_cu" required>
+                <option value="0.5">0.5 oz</option>
+                <option value="1" selected>1 oz</option>
+                <option value="2">2 oz</option>
+                <option value="3">3 oz</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="line_weight">最小線幅/線間<span class="required">*</span></label>
+              <select id="line_weight" name="line_weight" required>
+                <option value="3/3mil">3/3 mil</option>
+                <option value="4/4mil">4/4 mil</option>
+                <option value="5/5mil">5/5 mil</option>
+                <option value="6/6mil" selected>6/6 mil</option>
+                <option value="8/8mil">8/8 mil</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">見積もりを取得</button>
+      </form>
+
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p>見積もりを取得中...</p>
+      </div>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+    </div>
+
+    <div class="results-container" id="resultsContainer"></div>
+  </div>
+
+  <script>
+    let currentUnit = 'mm';
+    let currentCurrency = 'USD';
+    // Default fallback USD to JPY exchange rate (approximate average rate)
+    const DEFAULT_USD_TO_JPY_RATE = 150;
+    let exchangeRate = DEFAULT_USD_TO_JPY_RATE;
+    let pollInterval = null;
+
+    // Set unit (mm or inch)
+    function setUnit(unit) {
+      currentUnit = unit;
+      document.querySelectorAll('[data-unit]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.unit === unit);
+      });
+
+      // Update labels
+      if (unit === 'mm') {
+        document.getElementById('lengthLabel').textContent = '長さ (mm)';
+        document.getElementById('widthLabel').textContent = '幅 (mm)';
+      } else {
+        document.getElementById('lengthLabel').textContent = '長さ (inch)';
+        document.getElementById('widthLabel').textContent = '幅 (inch)';
+      }
+    }
+
+    // Set currency (USD or JPY)
+    function setCurrency(currency) {
+      currentCurrency = currency;
+      document.querySelectorAll('[data-currency]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.currency === currency);
+      });
+
+      // If JPY is selected, fetch exchange rate
+      if (currency === 'JPY') {
+        fetchExchangeRate();
+      }
+    }
+
+    // Fetch exchange rate from API
+    async function fetchExchangeRate() {
+      try {
+        const response = await fetch('/.netlify/functions/exchange-rate?from=USD&to=JPY');
+        if (response.ok) {
+          const data = await response.json();
+          exchangeRate = data.rate || DEFAULT_USD_TO_JPY_RATE;
+        }
+      } catch (error) {
+        console.error('Exchange rate fetch failed:', error);
+        exchangeRate = DEFAULT_USD_TO_JPY_RATE; // Fallback
+      }
+    }
+
+    // Show message
+    function showMessage(type, message) {
+      const errorEl = document.getElementById('errorMessage');
+      const successEl = document.getElementById('successMessage');
+      
+      if (type === 'error') {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        successEl.style.display = 'none';
+      } else {
+        successEl.textContent = message;
+        successEl.style.display = 'block';
+        errorEl.style.display = 'none';
+      }
+
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        errorEl.style.display = 'none';
+        successEl.style.display = 'none';
+      }, 5000);
+    }
+
+    // Convert units if needed
+    function convertToMM(value) {
+      if (currentUnit === 'inch') {
+        return value * 25.4;
+      }
+      return value;
+    }
+
+    // Format price based on currency
+    function formatPrice(priceUSD) {
+      if (currentCurrency === 'JPY') {
+        const priceJPY = parseFloat(priceUSD) * exchangeRate;
+        return `¥${Math.round(priceJPY).toLocaleString()}`;
+      }
+      return `$${parseFloat(priceUSD).toFixed(2)}`;
+    }
+
+    // Handle form submission
+    document.getElementById('pcbForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Clear previous results
+      document.getElementById('resultsContainer').style.display = 'none';
+      document.getElementById('resultsContainer').innerHTML = '';
+      document.getElementById('errorMessage').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'none';
+
+      // Show loading
+      document.getElementById('loadingSpinner').style.display = 'block';
+      document.getElementById('submitBtn').disabled = true;
+      document.getElementById('submitBtn').textContent = '処理中...';
+
+      // Collect form data
+      const formData = new FormData(e.target);
+      const params = {
+        thickness: parseFloat(formData.get('thickness')),
+        qty: parseInt(formData.get('qty')),
+        length: convertToMM(parseFloat(formData.get('length'))),
+        width: convertToMM(parseFloat(formData.get('width'))),
+        layer: parseInt(formData.get('layer')),
+        outer_cu: formData.get('outer_cu'),
+        color: formData.get('color'),
+        surface_finish: formData.get('surface_finish'),
+        line_weight: formData.get('line_weight')
+      };
+
+      try {
+        // Submit quote request
+        const response = await fetch('/.netlify/functions/get-quotes', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ params })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'サーバーエラーが発生しました');
+        }
+
+        const data = await response.json();
+        const requestId = data.request_id;
+
+        if (!requestId) {
+          throw new Error('リクエストIDを取得できませんでした');
+        }
+
+        // Show progress bar
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('progressBar').style.display = 'block';
+
+        // Start polling for results
+        pollForResults(requestId);
+
+      } catch (error) {
+        console.error('Error:', error);
+        showMessage('error', error.message || '見積もりの取得に失敗しました。後でもう一度お試しください。');
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').textContent = '見積もりを取得';
+      }
+    });
+
+    // Poll for results
+    function pollForResults(requestId) {
+      let pollCount = 0;
+      const maxPolls = 60; // 60 seconds max
+      
+      pollInterval = setInterval(async () => {
+        pollCount++;
+        
+        // Update progress
+        const progress = Math.min((pollCount / maxPolls) * 100, 95);
+        document.getElementById('progressFill').style.width = progress + '%';
+
+        try {
+          const response = await fetch(`/.netlify/functions/quotes?request_id=${requestId}`);
+          
+          if (!response.ok) {
+            throw new Error('ポーリングに失敗しました');
+          }
+
+          const data = await response.json();
+
+          if (data.status === 'completed' && data.quotes) {
+            // Clear polling
+            clearInterval(pollInterval);
+            document.getElementById('progressFill').style.width = '100%';
+
+            // Display results
+            displayResults(data.quotes);
+
+            // Reset UI
+            setTimeout(() => {
+              document.getElementById('progressBar').style.display = 'none';
+              document.getElementById('progressFill').style.width = '0%';
+              document.getElementById('submitBtn').disabled = false;
+              document.getElementById('submitBtn').textContent = '見積もりを取得';
+            }, 500);
+
+          } else if (data.status === 'failed') {
+            clearInterval(pollInterval);
+            throw new Error('見積もりの取得に失敗しました');
+          } else if (pollCount >= maxPolls) {
+            clearInterval(pollInterval);
+            throw new Error('タイムアウト: 見積もりの取得に時間がかかりすぎています');
+          }
+
+        } catch (error) {
+          console.error('Polling error:', error);
+          clearInterval(pollInterval);
+          showMessage('error', error.message || 'エラーが発生しました');
+          document.getElementById('progressBar').style.display = 'none';
+          document.getElementById('submitBtn').disabled = false;
+          document.getElementById('submitBtn').textContent = '見積もりを取得';
+        }
+      }, 1000);
+    }
+
+    // Display results
+    function displayResults(quotes) {
+      const container = document.getElementById('resultsContainer');
+      container.innerHTML = '';
+
+      const suppliers = Object.keys(quotes);
+      if (suppliers.length === 0) {
+        showMessage('error', '見積もり結果が見つかりませんでした');
+        return;
+      }
+
+      suppliers.forEach(supplierName => {
+        const supplierData = quotes[supplierName];
+        const card = createResultCard(supplierName, supplierData);
+        container.appendChild(card);
+      });
+
+      container.style.display = 'block';
+      showMessage('success', `${suppliers.length}社の見積もりを取得しました！`);
+
+      // Scroll to results
+      container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Create result card for a supplier
+    function createResultCard(supplierName, supplierData) {
+      const card = document.createElement('div');
+      card.className = 'result-card';
+
+      let html = `
+        <div class="result-header">
+          <div class="supplier-name">${supplierName}</div>
+        </div>
+      `;
+
+      // PCB prices
+      if (supplierData.PCB && supplierData.PCB.length > 0) {
+        html += `
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th>タイプ</th>
+                <th>価格</th>
+                <th>納期</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        supplierData.PCB.forEach(item => {
+          html += `
+            <tr>
+              <td>${item.type || 'Standard'}</td>
+              <td class="price-highlight">${formatPrice(item.price_usd || '0')}</td>
+              <td>${item.delivery_days || 'N/A'} 日</td>
+            </tr>
+          `;
+        });
+
+        html += `
+            </tbody>
+          </table>
+        `;
+      }
+
+      // Logistics
+      if (supplierData.logistic && supplierData.logistic.carriers) {
+        html += `
+          <h3 style="margin-top: 15px; margin-bottom: 10px; color: #6B6B6B;">配送オプション</h3>
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th>配送業者</th>
+                <th>配送料</th>
+                <th>配送日数</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        supplierData.logistic.carriers.forEach(carrier => {
+          html += `
+            <tr>
+              <td>${carrier.name || 'N/A'}</td>
+              <td>${formatPrice(carrier.money || '0')}</td>
+              <td>${carrier.days || 'N/A'} 日</td>
+            </tr>
+          `;
+        });
+
+        html += `
+            </tbody>
+          </table>
+        `;
+      }
+
+      card.innerHTML = html;
+      return card;
+    }
+
+    // Initialize exchange rate on page load if JPY is selected
+    window.addEventListener('DOMContentLoaded', () => {
+      if (currentCurrency === 'JPY') {
+        fetchExchangeRate();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -84,6 +84,32 @@ TeXt use [Tomorrow](https://github.com/chriskempson/tomorrow-theme) as the highl
 | [Archive](https://kitian616.github.io/jekyll-TeXt-theme/archive.html) | Archive page |
 | [Layout Examples](https://kitian616.github.io/jekyll-TeXt-theme/samples.html) | Examples for different layouts |
 
+## 🔧 PCB 報価比較ツール
+
+### 機能
+- 実時間で複数のPCBメーカーの見積もりを比較
+- 日本語インターフェース
+- 自動為替レート変換（USD/JPY）
+- モバイル端末最適化
+
+### デプロイ設定
+1. Netlify Dashboardで環境変数を設定（`.env.example`を参照）
+2. Python バックエンド API をデプロイ
+3. `EXTERNAL_API_BASE_URL` 環境変数を更新
+
+### ローカル開発
+```bash
+# 依存関係をインストール
+npm install
+
+# Netlify Dev を起動（Functions を含む）
+netlify dev
+```
+
+### アクセスURL
+- 本番環境: https://melodious-gingersnap-eedd0f.netlify.app/tools/pcb-quote/
+- ローカル開発: http://localhost:8888/tools/pcb-quote/
+
 ## License
 
 TeXt Theme is [MIT licensed](https://github.com/kitian616/jekyll-TeXt-theme/blob/master/LICENSE).
