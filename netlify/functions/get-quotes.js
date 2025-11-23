@@ -51,8 +51,7 @@ exports.handler = async (event, context) => {
         statusCode: 503,
         headers,
         body: JSON.stringify({ 
-          error: '後端APIがまだ設定されていません。管理者にお問い合わせください。',
-          details: 'Backend API is not configured yet. Please contact the administrator.'
+          error: '後端APIがまだ設定されていません。管理者にお問い合わせください。'
         })
       };
     }

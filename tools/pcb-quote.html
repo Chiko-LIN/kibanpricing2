@@ -396,7 +396,7 @@ permalink: /tools/pcb-quote/
               </select>
             </div>
             <div class="form-group">
-              <label for="color">阻焊颜色<span class="required">*</span></label>
+              <label for="color">ソルダーマスク色<span class="required">*</span></label>
               <select id="color" name="color" required>
                 <option value="Green" selected>緑</option>
                 <option value="Red">赤</option>
@@ -464,7 +464,9 @@ permalink: /tools/pcb-quote/
   <script>
     let currentUnit = 'mm';
     let currentCurrency = 'USD';
-    let exchangeRate = 150; // Default fallback
+    // Default fallback USD to JPY exchange rate (approximate average rate)
+    const DEFAULT_USD_TO_JPY_RATE = 150;
+    let exchangeRate = DEFAULT_USD_TO_JPY_RATE;
     let pollInterval = null;
 
     // Set unit (mm or inch)
@@ -503,11 +505,11 @@ permalink: /tools/pcb-quote/
         const response = await fetch('/.netlify/functions/exchange-rate?from=USD&to=JPY');
         if (response.ok) {
           const data = await response.json();
-          exchangeRate = data.rate || 150;
+          exchangeRate = data.rate || DEFAULT_USD_TO_JPY_RATE;
         }
       } catch (error) {
         console.error('Exchange rate fetch failed:', error);
-        exchangeRate = 150; // Fallback
+        exchangeRate = DEFAULT_USD_TO_JPY_RATE; // Fallback
       }
     }
 
@@ -754,11 +756,10 @@ permalink: /tools/pcb-quote/
         `;
 
         supplierData.logistic.carriers.forEach(carrier => {
-          const shippingPrice = carrier.currency === 'USD' ? carrier.money : carrier.money;
           html += `
             <tr>
               <td>${carrier.name || 'N/A'}</td>
-              <td>${formatPrice(shippingPrice || '0')}</td>
+              <td>${formatPrice(carrier.money || '0')}</td>
               <td>${carrier.days || 'N/A'} 日</td>
             </tr>
           `;

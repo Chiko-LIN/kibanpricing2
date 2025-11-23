@@ -34,7 +34,22 @@ exports.handler = async (event, context) => {
     const to = event.queryStringParameters?.to || 'JPY';
 
     // Get API key from environment
-    const apiKey = process.env.EXCHANGE_RATE_API_KEY || '04c0ac7e197cb98292070aca';
+    const apiKey = process.env.EXCHANGE_RATE_API_KEY;
+
+    if (!apiKey) {
+      console.warn('EXCHANGE_RATE_API_KEY not configured, using fallback rate');
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ 
+          from,
+          to,
+          rate: 150,
+          fallback: true,
+          message: 'Using fallback exchange rate - API key not configured'
+        })
+      };
+    }
 
     // Call exchange rate API
     const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}`;
