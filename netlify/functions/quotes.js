@@ -43,9 +43,26 @@ exports.handler = async (event, context) => {
     const apiBaseUrl = process.env.EXTERNAL_API_BASE_URL;
     const apiKey = process.env.EXTERNAL_API_KEY;
 
-    // Check if API is configured
-    if (!apiBaseUrl || apiBaseUrl.includes('placeholder') || apiBaseUrl.includes('example.com')) {
-      console.error('External API not configured. EXTERNAL_API_BASE_URL:', apiBaseUrl);
+    // Check if API is configured (validate URL properly)
+    if (!apiBaseUrl) {
+      console.error('External API not configured. EXTERNAL_API_BASE_URL is missing');
+      return {
+        statusCode: 503,
+        headers,
+        body: JSON.stringify({ 
+          error: '後端APIがまだ設定されていません。管理者にお問い合わせください。'
+        })
+      };
+    }
+
+    // Validate that URL is not a placeholder
+    try {
+      const url = new URL(apiBaseUrl);
+      if (url.hostname.endsWith('placeholder.example.com') || url.hostname === 'example.com') {
+        throw new Error('Placeholder URL detected');
+      }
+    } catch (error) {
+      console.error('External API URL validation failed:', error.message);
       return {
         statusCode: 503,
         headers,
