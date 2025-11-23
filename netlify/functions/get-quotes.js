@@ -59,7 +59,9 @@ exports.handler = async (event, context) => {
     // Validate that URL is not a placeholder
     try {
       const url = new URL(apiBaseUrl);
-      if (url.hostname.endsWith('placeholder.example.com') || url.hostname === 'example.com') {
+      // Check for placeholder domains using exact hostname match
+      const placeholderDomains = ['placeholder.example.com', 'example.com', 'your-python-backend.herokuapp.com'];
+      if (placeholderDomains.includes(url.hostname)) {
         throw new Error('Placeholder URL detected');
       }
     } catch (error) {
